@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web component 示例</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+        li::before {
+            display:inline-block;
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.25rem;
+            content:"";
+        }
+        .open::before, .closed::before {
+            background-size: 1rem 1rem;
+            position: relative;
+            top: 0.25rem;
+            opacity: 0.3;
+        }
+        .open::before {
+            background-image: url(img/down.png);
+        }
+        .closed::before {
+            background-image: url(img/right.png);
+        }
+        .closed .closed::before, .closed .open::before {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h5>shadow video</h5>
+
+    <p>你有好奇过这个问题吗，为什么只用video标签包裹着source标签，就可以完成一系列视频功能：播放/暂停按钮、进度条、视频时间显示、音量控制等等？既然 DOM 源码这么干净，你有想过实现这些组件的代码是从哪儿来的吗？</p>
+
+    <video controls autoplay name="media" width="500">
+        <source id="mp4" src="http://7ryl2t.com2.z0.glb.qiniucdn.com/572ffc37a2e5a.mp4" type="video/mp4">
+    </video>
+
+
+
+
+    <h5>Autonomous custom elements 独立的元素</h5>
+    <custom-button id="customBtn" class="btn btn--active" text="提交"></custom-button>
+
+
+
+
+
+    <h5>Customized built-in elements 继承自基本的HTML元素</h5>
+    <ul is="expanding-list">
+        <li>广东省
+            <ul>
+                <li>深圳市
+                    <ul>
+                        <li>南山区
+                            <ul>
+                                <li>粤海街道办</li>
+                                <li>南头街道办</li>
+                                <li>西丽街道办</li>
+                            </ul>
+                        </li>
+                        <li>罗湖区</li>
+                        <li>福田区</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>广西省
+            <ul>
+                <li>南宁市
+                    <ul>
+                        <li>兴宁区</li>
+                        <li>江南区</li>
+                        <li>良兴区</li>
+                    </ul>
+                </li>
+                <li>桂林市</li>
+                <li>北海市</li>
+            </ul>
+        </li>
+    </ul>
+
+    <script src="./autonomousCustomElements.js"></script>
+    <script src="./customizedBuiltinElements.js"></script>
+</body>
+</html>
