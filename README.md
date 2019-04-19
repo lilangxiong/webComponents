@@ -1,10 +1,12 @@
 ### 什么是 Shadow DOM？
-Shadow DOM它允许在文档（document）渲染时插入一棵DOM元素子树，但是这棵子树不在主DOM树中。
+Shadow DOM它允许在文档（document）渲染时插入一棵DOM元素子树，但是这棵子树不在主DOM树中。因此开发者可利用Shadow DOM 封装自己的 HTML 标签、CSS 样式和 JavaScript 代码。
 
-因此开发者可利用Shadow DOM 封装自己的 HTML 标签、CSS 样式和 JavaScript 代码。
+### 什么是shodow root？
+以video为例
 
-### W3C于2013年6月6日形成web components工作草案
+![video](./img/video.png)
 
+shadow-root叫做影子根。#shadow-root寄生在video上，所以video被称为影子宿主。可以看到上图有两个#shadow-root，因为#shadow-root可以嵌套，形成节点树，称为影子树（shadow trees）。影子树对其中的内容进行了封装，有选择性的进行渲染。这就意味着我们可以插入文本、重新安排内容、添加样式等等。
 
 ### 有两种自定义元素
 - Autonomous custom elements 是独立的元素，它不继承其他内建的HTML元素。可以直接写成HTML标签的形式。例如 `<popup-info>`，或者是`document.createElement("popup-info")`；

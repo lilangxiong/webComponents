@@ -32,7 +32,7 @@
     </style>
 </head>
 <body>
-    <h5>shadow video</h5>
+    <h3>shadow video</h3>
 
     <p>你有好奇过这个问题吗，为什么只用video标签包裹着source标签，就可以完成一系列视频功能：播放/暂停按钮、进度条、视频时间显示、音量控制等等？既然 DOM 源码这么干净，你有想过实现这些组件的代码是从哪儿来的吗？</p>
 
@@ -41,16 +41,28 @@
     </video>
 
 
+    <h3>shadow dom 的创建</h3>
+    <div class="shadowhost">Hello, world!</div>
+    <script>
+        // 影子宿主（shadow host）
+        var shadowHost = document.querySelector('.shadowhost');
+        // 创建影子根（shadow root）
+        var shadowRoot = shadowHost.createShadowRoot();
+        // 影子根作为影子树的第一个节点，其他的节点比如p节点都是它的子节点。
+        shadowRoot.innerHTML = '<p class="shadowroot_son">996听说可以这么理解：9点起床，9点睡觉，每天上6个小时的班。很棒！！！</p>';
+    </script>
 
 
-    <h5>Autonomous custom elements 独立的元素</h5>
+
+    <h3>Autonomous custom elements 独立的元素</h3>
     <custom-button id="customBtn" class="btn btn--active" text="提交"></custom-button>
+    <script src="./customizedBuiltinElements.js"></script>
 
 
 
 
 
-    <h5>Customized built-in elements 继承自基本的HTML元素</h5>
+    <h35>Customized built-in elements 继承自基本的HTML元素</h35>
     <ul is="expanding-list">
         <li>广东省
             <ul>
@@ -83,8 +95,6 @@
             </ul>
         </li>
     </ul>
-
     <script src="./autonomousCustomElements.js"></script>
-    <script src="./customizedBuiltinElements.js"></script>
 </body>
 </html>
