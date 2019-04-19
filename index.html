@@ -53,6 +53,31 @@
     </script>
 
 
+    <h3>渲染影子宿主里的内容</h3>
+    <div class="shadowhost2">
+        <span class="shadowhost_content1">写代码</span>
+        <span class="shadowhost_content2">拿钱行不行</span>
+    </div>
+    <!-- S 模板标签 template -->
+    <template class="template">
+        <h1>
+            你
+            <content select=".shadowhost_content1"></content>
+            我
+            <content select=".shadowhost_content2"></content>
+            !
+        </h1>
+    </template>
+    <!-- E 模板标签 template -->
+    <script>
+        var shadowHost = document.querySelector('.shadowhost2');
+        var shadowRoot = shadowHost.createShadowRoot();
+        var template = document.querySelector('.template');
+        // template.content会返回一个文档片段，可以理解为另外一个document。
+        // 利用document.importNode获取节点，true表示深度克隆。
+        shadowRoot.appendChild(document.importNode(template.content, true));
+    </script>
+
 
     <h3>Autonomous custom elements 独立的元素</h3>
     <custom-button id="customBtn" class="btn btn--active" text="提交"></custom-button>
@@ -62,7 +87,7 @@
 
 
 
-    <h35>Customized built-in elements 继承自基本的HTML元素</h35>
+    <h3>Customized built-in elements 继承自基本的HTML元素</h3>
     <ul is="expanding-list">
         <li>广东省
             <ul>

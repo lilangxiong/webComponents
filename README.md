@@ -8,6 +8,33 @@ Shadow DOM它允许在文档（document）渲染时插入一棵DOM元素子树�
 
 shadow-root叫做影子根。#shadow-root寄生在video上，所以video被称为影子宿主。可以看到上图有两个#shadow-root，因为#shadow-root可以嵌套，形成节点树，称为影子树（shadow trees）。影子树对其中的内容进行了封装，有选择性的进行渲染。这就意味着我们可以插入文本、重新安排内容、添加样式等等。
 
+### 渲染影子宿主里的内容
+content的select属性告诉content标签有选择性的插入内容。select 属性使用 CSS 选择器来选取想要展示的内容，选择器包括类选择器、元素选择器等。
+```html
+<div class="shadowhost2">
+        <span class="shadowhost_content1">写代码</span>
+        <span class="shadowhost_content2">拿钱行不行</span>
+    </div>
+    <!-- S 模板标签 template -->
+    <template class="template">
+        <h1>
+            你
+            <content select=".shadowhost_content1"></content>
+            我
+            <content select=".shadowhost_content2"></content>
+            !
+        </h1>
+    </template>
+    <!-- E 模板标签 template -->
+    <script>
+        var shadowHost = document.querySelector('.shadowhost2');
+        var shadowRoot = shadowHost.createShadowRoot();
+        var template = document.querySelector('.template');
+        // template.content会返回一个文档片段，可以理解为另外一个document。
+        // 利用document.importNode获取节点，true表示深度克隆。
+        shadowRoot.appendChild(document.importNode(template.content, true));
+    </script>
+```
 ### 有两种自定义元素
 - Autonomous custom elements 是独立的元素，它不继承其他内建的HTML元素。可以直接写成HTML标签的形式。例如 `<popup-info>`，或者是`document.createElement("popup-info")`；
 - Customized built-in elements 继承自基本的HTML元素。创建时必须指定所需扩展的元素， 使用时，需要先写出基本的元素标签，并通过 is 属性指定custom element的名称。例如`<p is="word-count">`, 或者 `document.createElement("p", { is: "word-count" })`；
